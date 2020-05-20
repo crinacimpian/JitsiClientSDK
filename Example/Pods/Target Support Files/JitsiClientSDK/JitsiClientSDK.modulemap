@@ -1,0 +1,6 @@
+framework module JitsiClientSDK {
+  umbrella header "JitsiClientSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}
