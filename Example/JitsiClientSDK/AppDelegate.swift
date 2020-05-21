@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
 
     var window: UIWindow?
     let pushRegistry = PKPushRegistry(queue: DispatchQueue.main)
-    let callManager = CallManager()
 
     // MARK: UIApplicationDelegate
 
@@ -32,14 +31,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
         pushRegistry.delegate = self
         pushRegistry.desiredPushTypes = [.voIP]
 
-        let localizedName = NSLocalizedString("Elyments", comment: "Elyments Jitsi Call") // TODO
+        let localizedName = NSLocalizedString("Jitsi", comment: "Jitsi Call") // TODO
         var iconTemplateImageData: Data? = nil
         if let iconMaskImage = UIImage(named: "IconMask") {
             iconTemplateImageData = iconMaskImage.pngData()
         }
         let ringtoneSound: String? = nil //"Ringtone.caf"
         JMCallKitProxy.configureProvider(localizedName: localizedName, ringtoneSound: ringtoneSound, iconTemplateImageData: iconTemplateImageData)
-        JMCallKitProxy.addListener(callManager)
+        JMCallKitProxy.addListener(CallManager())
         JMCallKitProxy.enabled = true // is it needed?!
         return true
     }

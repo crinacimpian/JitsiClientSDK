@@ -1,11 +1,10 @@
-/*
-    Copyright (C) 2016 Apple Inc. All Rights Reserved.
-    See LICENSE.txt for this sample’s licensing information
-    
-    Abstract:
-    Manager of SpeakerboxCalls, which demonstrates using a CallKit CXCallController to request actions on calls
-    Maintains a list of calls
-*/
+//
+//  CallViewController.swift
+//  JitsiClientSDK_Example
+//
+//  Created by Crina Cimpian on 5/20/20.
+//  Copyright © 2020 CocoaPods. All rights reserved.
+//
 
 import UIKit
 import CallKit
@@ -15,7 +14,6 @@ import AVKit
 final class CallManager: NSObject, JMCallKitListener {
 
     var jitsiViewController: CallViewController?
-    let callController = CXCallController()
 
     // MARK: Actions
 
@@ -24,7 +22,7 @@ final class CallManager: NSObject, JMCallKitListener {
 
         // Show the jitsi conference view - how?!
         jitsiViewController = CallViewController()
-        //methodToShowTheViewController()
+        methodToShowTheViewController()
     }
 
     func methodToShowTheViewController() {

@@ -117,13 +117,12 @@
 		607FACD21AFB9204008FA782 /* Example for JitsiClientSDK */ = {
 			isa = PBXGroup;
 			children = (
+				EC371B34247651AD00CB0C8F /* Controller */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				607FACD91AFB9204008FA782 /* Main.storyboard */,
-				607FACDC1AFB9204008FA782 /* Images.xcassets */,
-				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
-				EC371B0F2475D86100CB0C8F /* CallViewController.swift */,
 				EC371B2B2475F0E900CB0C8F /* CallManager.swift */,
+				607FACD91AFB9204008FA782 /* Main.storyboard */,
+				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
+				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
 			name = "Example for JitsiClientSDK";
@@ -163,6 +162,15 @@
 				EDAE89B419D39DE52E63284A /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		EC371B34247651AD00CB0C8F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				EC371B0F2475D86100CB0C8F /* CallViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
