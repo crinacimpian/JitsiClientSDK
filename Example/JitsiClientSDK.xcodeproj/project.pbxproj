@@ -16,13 +16,7 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		B0549895B6D7A6BD43EEDF30 /* Pods_JitsiClientSDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1835055C8797095F4A7A6 /* Pods_JitsiClientSDK_Example.framework */; };
 		EC371B102475D86100CB0C8F /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC371B0F2475D86100CB0C8F /* CallViewController.swift */; };
-		EC371B1E2475E88100CB0C8F /* SpeakerboxCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC371B1D2475E88100CB0C8F /* SpeakerboxCall.swift */; };
-		EC371B202475E9B600CB0C8F /* Array+Speakerbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC371B1F2475E9B600CB0C8F /* Array+Speakerbox.swift */; };
-		EC371B222475EEAC00CB0C8F /* StartCallConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC371B212475EEAC00CB0C8F /* StartCallConvertible.swift */; };
-		EC371B242475EECF00CB0C8F /* URL+StartCallConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC371B232475EECF00CB0C8F /* URL+StartCallConvertible.swift */; };
-		EC371B262475EEF700CB0C8F /* NSUserActivity+StartCallConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC371B252475EEF700CB0C8F /* NSUserActivity+StartCallConvertible.swift */; };
-		EC371B282475EF5800CB0C8F /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC371B272475EF5800CB0C8F /* IntentHandler.swift */; };
-		EC371B2C2475F0E900CB0C8F /* SpeakerboxCallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC371B2B2475F0E900CB0C8F /* SpeakerboxCallManager.swift */; };
+		EC371B2C2475F0E900CB0C8F /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC371B2B2475F0E900CB0C8F /* CallManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,13 +48,7 @@
 		CA3024DA8AC239185D12062C /* Pods-JitsiClientSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JitsiClientSDK_Tests.release.xcconfig"; path = "Target Support Files/Pods-JitsiClientSDK_Tests/Pods-JitsiClientSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D8692C5248030F077A80A4F3 /* Pods_JitsiClientSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JitsiClientSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC371B0F2475D86100CB0C8F /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
-		EC371B1D2475E88100CB0C8F /* SpeakerboxCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerboxCall.swift; sourceTree = "<group>"; };
-		EC371B1F2475E9B600CB0C8F /* Array+Speakerbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Speakerbox.swift"; sourceTree = "<group>"; };
-		EC371B212475EEAC00CB0C8F /* StartCallConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartCallConvertible.swift; sourceTree = "<group>"; };
-		EC371B232475EECF00CB0C8F /* URL+StartCallConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+StartCallConvertible.swift"; sourceTree = "<group>"; };
-		EC371B252475EEF700CB0C8F /* NSUserActivity+StartCallConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSUserActivity+StartCallConvertible.swift"; sourceTree = "<group>"; };
-		EC371B272475EF5800CB0C8F /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
-		EC371B2B2475F0E900CB0C8F /* SpeakerboxCallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerboxCallManager.swift; sourceTree = "<group>"; };
+		EC371B2B2475F0E900CB0C8F /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		EDAE89B419D39DE52E63284A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F28CC272F30128E18CE270C8 /* Pods-JitsiClientSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JitsiClientSDK_Tests.debug.xcconfig"; path = "Target Support Files/Pods-JitsiClientSDK_Tests/Pods-JitsiClientSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,19 +117,13 @@
 		607FACD21AFB9204008FA782 /* Example for JitsiClientSDK */ = {
 			isa = PBXGroup;
 			children = (
-				EC371B2F2475F64E00CB0C8F /* IntentsExtension */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				EC371B0F2475D86100CB0C8F /* CallViewController.swift */,
-				EC371B1D2475E88100CB0C8F /* SpeakerboxCall.swift */,
-				EC371B2B2475F0E900CB0C8F /* SpeakerboxCallManager.swift */,
-				EC371B1F2475E9B600CB0C8F /* Array+Speakerbox.swift */,
-				EC371B212475EEAC00CB0C8F /* StartCallConvertible.swift */,
-				EC371B232475EECF00CB0C8F /* URL+StartCallConvertible.swift */,
-				EC371B252475EEF700CB0C8F /* NSUserActivity+StartCallConvertible.swift */,
+				EC371B2B2475F0E900CB0C8F /* CallManager.swift */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
 			name = "Example for JitsiClientSDK";
@@ -181,14 +163,6 @@
 				EDAE89B419D39DE52E63284A /* LICENSE */,
 			);
 			name = "Podspec Metadata";
-			sourceTree = "<group>";
-		};
-		EC371B2F2475F64E00CB0C8F /* IntentsExtension */ = {
-			isa = PBXGroup;
-			children = (
-				EC371B272475EF5800CB0C8F /* IntentHandler.swift */,
-			);
-			name = IntentsExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -394,15 +368,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC371B102475D86100CB0C8F /* CallViewController.swift in Sources */,
-				EC371B2C2475F0E900CB0C8F /* SpeakerboxCallManager.swift in Sources */,
-				EC371B202475E9B600CB0C8F /* Array+Speakerbox.swift in Sources */,
-				EC371B262475EEF700CB0C8F /* NSUserActivity+StartCallConvertible.swift in Sources */,
-				EC371B282475EF5800CB0C8F /* IntentHandler.swift in Sources */,
-				EC371B222475EEAC00CB0C8F /* StartCallConvertible.swift in Sources */,
+				EC371B2C2475F0E900CB0C8F /* CallManager.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				EC371B1E2475E88100CB0C8F /* SpeakerboxCall.swift in Sources */,
-				EC371B242475EECF00CB0C8F /* URL+StartCallConvertible.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

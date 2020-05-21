@@ -46,18 +46,32 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIK-Ot-F7D">
-                                <rect key="frame" x="111" y="540" width="153" height="30"/>
+                                <rect key="frame" x="85.5" y="540" width="204" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="v7y-Nd-9XC"/>
                                 </constraints>
-                                <state key="normal" title="Simulate incoming call"/>
+                                <state key="normal" title="Simulate incoming AUDIO call"/>
                                 <connections>
                                     <action selector="simulateIncomingCallPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="uem-qn-wMe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2q-V8-86Z">
+                                <rect key="frame" x="86.5" y="578" width="202" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="TpM-nQ-rkJ"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="oI7-r2-lpe"/>
+                                </constraints>
+                                <state key="normal" title="Simulate incoming VIDEO call"/>
+                                <connections>
+                                    <action selector="simulateIncomingCallPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="sGT-ZU-4tr"/>
+                                    <action selector="simulateIncomingVideoCallPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="EQE-Fp-Xf4"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="j2q-V8-86Z" firstAttribute="top" secondItem="FIK-Ot-F7D" secondAttribute="bottom" constant="8" id="80X-62-Yra"/>
+                            <constraint firstItem="j2q-V8-86Z" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="8mJ-Of-cOy"/>
                             <constraint firstItem="GUp-0O-8N3" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="CW4-Jd-H5l"/>
                             <constraint firstItem="dfM-T3-WfO" firstAttribute="top" secondItem="f5m-ct-Sy4" secondAttribute="bottom" constant="200" id="EVU-a1-To6"/>
                             <constraint firstItem="f5m-ct-Sy4" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="100" id="GHV-nS-N6J"/>
@@ -72,6 +86,7 @@
                         <outlet property="joinButton" destination="GUp-0O-8N3" id="dPt-qj-R2q"/>
                         <outlet property="roomName" destination="dfM-T3-WfO" id="Xdi-aZ-uIr"/>
                         <outlet property="simulateIncomingCall" destination="FIK-Ot-F7D" id="ngp-3h-eiD"/>
+                        <outlet property="simulateIncomingVideoCall" destination="j2q-V8-86Z" id="MRc-ju-GtJ"/>
                         <outlet property="videoButton" destination="f5m-ct-Sy4" id="xdq-QL-HDV"/>
                     </connections>
                 </viewController>

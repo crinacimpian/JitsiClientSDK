@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
 
     var window: UIWindow?
     let pushRegistry = PKPushRegistry(queue: DispatchQueue.main)
-    let callManager = SpeakerboxCallManager()
+    let callManager = CallManager()
 
     // MARK: UIApplicationDelegate
 
@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
         pushRegistry.delegate = self
         pushRegistry.desiredPushTypes = [.voIP]
 
-        let localizedName = NSLocalizedString("Elyments", comment: "Elyments Jitsi Call")
+        let localizedName = NSLocalizedString("Elyments", comment: "Elyments Jitsi Call") // TODO
         var iconTemplateImageData: Data? = nil
         if let iconMaskImage = UIImage(named: "IconMask") {
             iconTemplateImageData = iconMaskImage.pngData()
@@ -45,27 +45,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        guard let handle = url.startCallHandle else {
-            print("Could not determine start call handle from URL: \(url)")
-            return false
-        }
-
-        callManager.startCall(handle: handle)
         return true
     }
 
     private func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        guard let handle = userActivity.startCallHandle else {
-            print("Could not determine start call handle from user activity: \(userActivity)")
-            return false
-        }
-
-        guard let video = userActivity.video else {
-            print("Could not determine video from user activity: \(userActivity)")
-            return false
-        }
-
-        callManager.startCall(handle: handle, video: video)
         return true
     }
 
@@ -97,17 +80,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
         print("displayIncomingCall \(uuid) \(handle) \(hasVideo)")
 
         // Display the incoming call
-        let displayName = "jitsi hello" // temporary
-        JMCallKitProxy.reportNewIncomingCall(UUID: uuid, handle: handle, displayName: displayName, hasVideo: hasVideo) { error in
+        JMCallKitProxy.reportNewIncomingCall(UUID: uuid, handle: handle, displayName: handle, hasVideo: true) { error in
             /*
                 Only add incoming call to the app's list of calls if the call was allowed (i.e. there was no error)
                 since calls may be "denied" for various legitimate reasons. See CXErrorCodeIncomingCallError.
              */
             if error == nil {
-                let call = SpeakerboxCall(uuid: uuid)
-                call.handle = handle
-
-                self.callManager.addCall(call)
+                print("no error")
+            } else {
+                print("error \(error.debugDescription)")
             }
 
             completion?(error as NSError?)

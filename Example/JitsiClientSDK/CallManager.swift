@@ -24,7 +24,7 @@ final class CallManager: NSObject, JMCallKitListener {
 
         // Show the jitsi conference view - how?!
         jitsiViewController = CallViewController()
-        methodToShowTheViewController()
+        //methodToShowTheViewController()
     }
 
     func methodToShowTheViewController() {

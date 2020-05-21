@@ -15,6 +15,7 @@ class CallViewController: UIViewController, JitsiMeetViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         print("CallViewController did load")
         
         jitsiMeetView = JitsiMeetView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -38,6 +39,7 @@ class CallViewController: UIViewController, JitsiMeetViewDelegate {
             builder.videoMuted = false
             builder.welcomePageEnabled = false
             builder.setFeatureFlag("chat.enabled", withBoolean: false)
+            builder.setFeatureFlag("invite.enabled", withBoolean: false)
         })
         
         // Join the conference
