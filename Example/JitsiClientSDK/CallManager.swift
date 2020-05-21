@@ -13,7 +13,7 @@ import AVKit
 
 final class CallManager: NSObject, JMCallKitListener {
     
-    let vc = UIViewController()
+    let vc = CallViewController()
     var jitsiMeetView: JitsiMeetView?
     
     func startCall(handle: String, video: Bool = true) {
@@ -44,7 +44,7 @@ final class CallManager: NSObject, JMCallKitListener {
         jitsiMeetEnd(UUID: UUID)
     }
     
-    fileprivate func jitsiMeetJoin(UUID: UUID) {
+    fileprivate func jitsiMeetJoin(UUID: UUID, video: Bool = true) {
         // create and configure jitsimeet view
         jitsiMeetView = JitsiMeetView()
         let options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
@@ -56,7 +56,7 @@ final class CallManager: NSObject, JMCallKitListener {
             builder.room = "Jane"
             builder.audioOnly = false
             builder.audioMuted = false
-            builder.videoMuted = false
+            builder.videoMuted = !video
             builder.welcomePageEnabled = false
             
         }
@@ -71,6 +71,7 @@ final class CallManager: NSObject, JMCallKitListener {
     }
     
     fileprivate func jitsiMeetEnd(UUID: UUID) {
+        print("CallManager jitsiMeetEnd")
         if(jitsiMeetView != nil) {
             vc.dismiss(animated: true, completion: nil)
             jitsiMeetView = nil
@@ -86,7 +87,7 @@ final class CallManager: NSObject, JMCallKitListener {
     
     func performStartCall(UUID: UUID, isVideo: Bool) {
         print("CallManager performStartCall")
-        jitsiMeetJoin(UUID: UUID)
+        jitsiMeetJoin(UUID: UUID, video: isVideo)
     }
     
     func providerDidActivateAudioSession(session: AVAudioSession) {
