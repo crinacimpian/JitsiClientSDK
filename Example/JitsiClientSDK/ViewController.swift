@@ -19,15 +19,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var simulateIncomingCall: UIButton!
     @IBOutlet weak var simulateIncomingVideoCall: UIButton!
     
-    var jitsiJoin: Bool = false
+    @IBOutlet weak var dialBtn: UIButton!
+    
+    @IBOutlet weak var videoCallBtn: UIButton!
+    
+    
+    fileprivate var jitsiJoin: Bool = false
     static var jitsiServerUrl: URL = URL(fileURLWithPath: "https://meet.jit.si")
     //    static var jitsiServerUrl: URL = URL(fileURLWithPath: "https://meet.rajpratyush.com")
     
+    fileprivate var callManager: CallManager?
     fileprivate var pipViewCoordinator: PiPViewCoordinator?
     fileprivate var jitsiMeetView: JitsiMeetView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        callManager = AppDelegate.shared.callManager
     }
     
     // MARK: - Actions
@@ -96,6 +103,14 @@ class ViewController: UIViewController {
         
     }
     
+    
+    @IBAction func onDialPressed(_ sender: Any) {
+        callManager?.startCall(handle: "Jane", video: false)
+    }
+    
+    @IBAction func onVideoCallPressed(_ sender: Any) {
+        callManager?.startCall(handle: "Jane")
+    }
     
     override func viewWillTransition(to size: CGSize,
                                      with coordinator: UIViewControllerTransitionCoordinator) {

@@ -16,6 +16,22 @@ final class CallManager: NSObject, JMCallKitListener {
     let vc = UIViewController()
     var jitsiMeetView: JitsiMeetView?
     
+    func startCall(handle: String, video: Bool = true) {
+        let handle = CXHandle(type: .phoneNumber, value: handle)
+        let startCallAction = CXStartCallAction(call: UUID(), handle: handle)
+
+        startCallAction.isVideo = video
+
+        let transaction = CXTransaction()
+        transaction.addAction(startCallAction)
+        JMCallKitProxy.request(transaction) { error in
+            if let error = error {
+                print("Error requesting transaction: \(error)")
+            } else {
+                print("Requested transaction successfully")
+            }
+        }
+    }
     // MARK: Actions
     
     func performAnswerCall(UUID: UUID) {
@@ -64,14 +80,13 @@ final class CallManager: NSObject, JMCallKitListener {
         print("CallManager provider did reset")
     }
     
-    
-    
     func performSetMutedCall(UUID: UUID, isMuted: Bool) {
         print("CallManager call muted \(isMuted)")
     }
     
     func performStartCall(UUID: UUID, isVideo: Bool) {
         print("CallManager performStartCall")
+        jitsiMeetJoin(UUID: UUID)
     }
     
     func providerDidActivateAudioSession(session: AVAudioSession) {
