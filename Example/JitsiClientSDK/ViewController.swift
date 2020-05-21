@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var roomName: UITextField!
     @IBOutlet weak var joinButton: UIButton?
     
+    @IBOutlet weak var simulateIncomingCall: UIButton!
     var jitsiJoin: Bool = false
     static var jitsiServerUrl: URL = URL(fileURLWithPath: "https://meet.jit.si")
 //    static var jitsiServerUrl: URL = URL(fileURLWithPath: "https://meet.rajpratyush.com")
@@ -25,6 +26,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        callManager = AppDelegate.shared.callManager
     }
 
     override func viewWillTransition(to size: CGSize,
@@ -36,6 +38,19 @@ class ViewController: UIViewController {
     }
 
     // MARK: - Actions
+
+    @IBAction func simulateIncomingCallPressed(_ sender: Any) {
+        /*
+            Since the app may be suspended while waiting for the delayed action to begin,
+            start a background task.
+         */
+        let backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+        DispatchQueue.main.asyncAfter(wallDeadline: DispatchWallTime.now() + 5) {
+            AppDelegate.shared.displayIncomingCall(uuid: UUID(), handle: "handle", hasVideo: true) { _ in
+                UIApplication.shared.endBackgroundTask(backgroundTaskIdentifier)
+            }
+        }
+    }
 
     @IBAction func openJitsiMeet(sender: Any?) {
         jitsiJoin = false

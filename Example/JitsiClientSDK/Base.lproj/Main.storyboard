@@ -45,6 +45,16 @@
                                     <action selector="openJitsiMeetJoinWithSender:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9vz-t2-RKP"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIK-Ot-F7D">
+                                <rect key="frame" x="111" y="540" width="153" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="v7y-Nd-9XC"/>
+                                </constraints>
+                                <state key="normal" title="Simulate incoming call"/>
+                                <connections>
+                                    <action selector="simulateIncomingCallPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="uem-qn-wMe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -52,13 +62,16 @@
                             <constraint firstItem="dfM-T3-WfO" firstAttribute="top" secondItem="f5m-ct-Sy4" secondAttribute="bottom" constant="200" id="EVU-a1-To6"/>
                             <constraint firstItem="f5m-ct-Sy4" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="100" id="GHV-nS-N6J"/>
                             <constraint firstItem="f5m-ct-Sy4" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Jwo-jN-gyQ"/>
+                            <constraint firstItem="FIK-Ot-F7D" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Sg4-QE-Th2"/>
                             <constraint firstItem="dfM-T3-WfO" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="fLK-vF-dVL"/>
                             <constraint firstItem="GUp-0O-8N3" firstAttribute="top" secondItem="dfM-T3-WfO" secondAttribute="bottom" constant="25" id="p9V-21-GMq"/>
+                            <constraint firstItem="FIK-Ot-F7D" firstAttribute="top" secondItem="GUp-0O-8N3" secondAttribute="bottom" constant="115" id="sf0-Av-W94"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="joinButton" destination="GUp-0O-8N3" id="dPt-qj-R2q"/>
                         <outlet property="roomName" destination="dfM-T3-WfO" id="Xdi-aZ-uIr"/>
+                        <outlet property="simulateIncomingCall" destination="FIK-Ot-F7D" id="ngp-3h-eiD"/>
                         <outlet property="videoButton" destination="f5m-ct-Sy4" id="xdq-QL-HDV"/>
                     </connections>
                 </viewController>
