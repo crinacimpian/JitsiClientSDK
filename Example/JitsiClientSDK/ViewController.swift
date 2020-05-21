@@ -96,6 +96,7 @@ class ViewController: UIViewController {
         
     }
     
+    
     override func viewWillTransition(to size: CGSize,
                                      with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
@@ -110,7 +111,7 @@ class ViewController: UIViewController {
          start a background task.
          */
         let backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
-        DispatchQueue.main.asyncAfter(wallDeadline: DispatchWallTime.now() + 5) {
+        DispatchQueue.main.asyncAfter(wallDeadline: DispatchWallTime.now() + 2) {
             AppDelegate.shared.displayIncomingCall(uuid: UUID(), handle: "Jane", hasVideo: hasVideo) { _ in
                 UIApplication.shared.endBackgroundTask(backgroundTaskIdentifier)
             }

@@ -12,50 +12,78 @@ import JitsiMeet
 import AVKit
 
 final class CallManager: NSObject, JMCallKitListener {
-
-    var jitsiViewController: CallViewController?
-
+    
+    let vc = UIViewController()
+    var jitsiMeetView: JitsiMeetView?
+    
     // MARK: Actions
-
+    
     func performAnswerCall(UUID: UUID) {
-        print("CallKit call is answered - \(UUID)")
-
-        // Show the jitsi conference view - how?!
-        jitsiViewController = CallViewController()
-        methodToShowTheViewController()
+        print("CallManager call is answered - \(UUID)")
+        jitsiMeetJoin(UUID: UUID)
     }
-
-    func methodToShowTheViewController() {
-        //jitsiViewController?.show(<#T##vc: UIViewController##UIViewController#>, sender: <#T##Any?#>)
-        jitsiViewController?.view.viewWithTag(100)?.isHidden = false
-    }
-
-    func providerDidReset() {
-        print("provider did reset")
-    }
-
+    
     func performEndCall(UUID: UUID) {
-        print("CallKit call ended - \(UUID)")
+        print("CallManager call ended - \(UUID)")
+        jitsiMeetEnd(UUID: UUID)
     }
-
+    
+    fileprivate func jitsiMeetJoin(UUID: UUID) {
+        // create and configure jitsimeet view
+        jitsiMeetView = JitsiMeetView()
+        let options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
+            builder.welcomePageEnabled = false
+            builder.setFeatureFlag("chat.enabled", withBoolean: false)
+            builder.setFeatureFlag("invite.enabled", withBoolean: false)
+            
+            // TODO get the following info based on UUID
+            builder.room = "Jane"
+            builder.audioOnly = false
+            builder.audioMuted = false
+            builder.videoMuted = false
+            builder.welcomePageEnabled = false
+            
+        }
+        
+        // setup view controller
+        vc.modalPresentationStyle = .fullScreen
+        vc.view = jitsiMeetView
+        
+        // join room and display jitsi-call
+        jitsiMeetView?.join(options)
+        UIApplication.shared.keyWindow?.rootViewController?.present(vc, animated: true, completion: nil)
+    }
+    
+    fileprivate func jitsiMeetEnd(UUID: UUID) {
+        if(jitsiMeetView != nil) {
+            vc.dismiss(animated: true, completion: nil)
+            jitsiMeetView = nil
+        }
+    }
+    func providerDidReset() {
+        print("CallManager provider did reset")
+    }
+    
+    
+    
     func performSetMutedCall(UUID: UUID, isMuted: Bool) {
-        print("call muted \(isMuted)")
+        print("CallManager call muted \(isMuted)")
     }
-
+    
     func performStartCall(UUID: UUID, isVideo: Bool) {
-        print("performStartCall")
+        print("CallManager performStartCall")
     }
-
+    
     func providerDidActivateAudioSession(session: AVAudioSession) {
-        print("didActivateAudioSession")
+        print("CallManager didActivateAudioSession")
     }
-
+    
     func providerDidDeactivateAudioSession(session: AVAudioSession) {
-        print("didDeactivateAudioSession")
+        print("CallManager didDeactivateAudioSession")
     }
-
+    
     func providerTimedOutPerformingAction(action: CXAction) {
-        print("timedOut")
+        print("CallManager timedOut")
     }
-
+    
 }

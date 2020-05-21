@@ -16,6 +16,8 @@ import CallKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
 
+    let callManager = CallManager()
+    
     class var shared: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
@@ -38,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
         }
         let ringtoneSound: String? = nil //"Ringtone.caf"
         JMCallKitProxy.configureProvider(localizedName: localizedName, ringtoneSound: ringtoneSound, iconTemplateImageData: iconTemplateImageData)
-        JMCallKitProxy.addListener(CallManager())
+        JMCallKitProxy.addListener(callManager)
         JMCallKitProxy.enabled = true // is it needed?!
         return true
     }
