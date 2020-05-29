@@ -44,6 +44,8 @@ final class CallManager: NSObject, JMCallKitListener {
     func performEndCall(UUID: UUID) {
         print("CallManager call ended - \(UUID)")
         jitsiMeetEnd(UUID: UUID)
+        // TODO - call following wherever it is needed for each end reason
+//        JMCallKitProxy.reportCall(with: UUID, endedAt: Date(), reason: CXCallEndedReason.declinedElsewhere)
     }
     
     fileprivate func jitsiMeetJoin(UUID: UUID, video: Bool = true) {
@@ -85,9 +87,18 @@ final class CallManager: NSObject, JMCallKitListener {
         print("CallManager call muted \(isMuted)")
     }
     
+    
     func performStartCall(UUID: UUID, isVideo: Bool) {
         print("CallManager performStartCall")
+        /* TODO - does JM takes care of the audio?!
+            Configure the audio session, but do not start call audio here, since it must be done once the audio session has been activated by the system after having its priority elevated.
+         */
         jitsiMeetJoin(UUID: UUID, video: isVideo)
+        /*
+            Set callback blocks for significant events in the call's lifecycle, so that the CXProvider may be updated to reflect the updated state.
+         */
+        JMCallKitProxy.reportOutgoingCall(with: UUID, startedConnectingAt: Date())
+        JMCallKitProxy.reportOutgoingCall(with: UUID, connectedAt: Date())
     }
     
     func providerDidActivateAudioSession(session: AVAudioSession) {
