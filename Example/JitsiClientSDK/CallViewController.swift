@@ -30,13 +30,25 @@ class CallViewController: UIViewController, JitsiMeetViewDelegate {
     }
     
     func conferenceTerminated(_ data: [AnyHashable : Any]!) {
-        print("CallManager:CVC conferenceTerminated")
-        if (uuid != nil) {
-            endCall(uuid: uuid!)
+        print("CallManager:CVC conferenceTerminated \(String(describing: data["url"]))")
+        // TODO - better way to extract the UUID from URL
+        if let uuidPath  = URL(string: data["url"] as! String)?.path {
+            let i = uuidPath.index(uuidPath.startIndex, offsetBy: 1) // skip "/"
+            if let uuid = UUID(uuidString: String(uuidPath.suffix(from: i))) {
+                print("CallManager:CVC end call for \(uuid)")
+                endCall(uuid: uuid)
+            }
         }
         //cleanUp()
     }
     
+    func conferenceJoined(_ data: [AnyHashable : Any]!) {
+        print("CallManager:CVC conferenceJoined \(String(describing: data))")
+    }
+    
+    func conferenceWillJoin(_ data: [AnyHashable : Any]!) {
+        print("CallManager:CVC conferenceWillJoin \(String(describing: data))")
+    }
     func endCall(uuid:UUID) { // TODO - pass Call
         print("CallManager end call")
         let endCallAction = CXEndCallAction(call: uuid)
