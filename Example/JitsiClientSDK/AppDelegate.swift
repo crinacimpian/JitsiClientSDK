@@ -28,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
     // MARK: UIApplicationDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        print("Finished launching with options: \(String(describing: launchOptions))")
-
+        print("CallManager:AppDelegate - finished launching with options: \(String(describing: launchOptions))")
+        JitsiMeet.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions ?? [:])
         pushRegistry.delegate = self
         pushRegistry.desiredPushTypes = [.voIP]
 
@@ -46,17 +46,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        print("CallManager:AppDelegate - _app url")
+        JitsiMeet.sharedInstance().application(app, open: url, options: options)
         return true
     }
 
     private func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        print("CallManager:AppDelegate - _app userActivity")
+        JitsiMeet.sharedInstance().application(application, continue: userActivity, restorationHandler: restorationHandler)
         return true
     }
 
     // MARK: PKPushRegistryDelegate
 
     func pushRegistry(_ registry: PKPushRegistry, didUpdate credentials: PKPushCredentials, for type: PKPushType) {
-        print("push registry called 1")
+        print("CallManager:AppDelegate - push registry called 1")
         /*
          Store push credentials on server for the active user.
          For sample app purposes, do nothing since everything is being done locally.
@@ -64,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
-        print("push registry called 2")
+        print("CallManager:AppDelegate - push registry called 2")
         guard type == .voIP else { return }
 
         if let uuidString = payload.dictionaryPayload["UUID"] as? String,
@@ -78,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
 
     /// Display the incoming call to the user
     func displayIncomingCall(uuid: UUID, handle: String, hasVideo: Bool = false, completion: ((NSError?) -> Void)? = nil) {
-        print("displayIncomingCall \(uuid) \(handle) \(hasVideo)")
+        print("CallManager:AppDelegate - displayIncomingCall \(uuid) \(handle) \(hasVideo)")
 
         // Display the incoming call
         JMCallKitProxy.reportNewIncomingCall(UUID: uuid, handle: handle, displayName: handle, hasVideo: true) { error in

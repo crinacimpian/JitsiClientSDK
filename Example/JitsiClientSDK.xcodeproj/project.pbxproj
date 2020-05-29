@@ -48,6 +48,7 @@
 		EC371B2B2475F0E900CB0C8F /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		EC371B3524765D9100CB0C8F /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		EC371B37247705E300CB0C8F /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
+		EC6F4243247D6DF000DB7D55 /* JitsiClientSDK_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JitsiClientSDK_Example.entitlements; sourceTree = "<group>"; };
 		EDAE89B419D39DE52E63284A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F28CC272F30128E18CE270C8 /* Pods-JitsiClientSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JitsiClientSDK_Tests.debug.xcconfig"; path = "Target Support Files/Pods-JitsiClientSDK_Tests/Pods-JitsiClientSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,6 +97,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				EC6F4243247D6DF000DB7D55 /* JitsiClientSDK_Example.entitlements */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for JitsiClientSDK */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -530,6 +532,7 @@
 			baseConfigurationReference = C6AF402E401865DA9B719D99 /* Pods-JitsiClientSDK_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = JitsiClientSDK_Example.entitlements;
 				DEVELOPMENT_TEAM = XV2Y9G25KS;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = JitsiClientSDK/Info.plist;
@@ -548,6 +551,7 @@
 			baseConfigurationReference = 55F962D5157D0434C382C25E /* Pods-JitsiClientSDK_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = JitsiClientSDK_Example.entitlements;
 				DEVELOPMENT_TEAM = XV2Y9G25KS;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = JitsiClientSDK/Info.plist;

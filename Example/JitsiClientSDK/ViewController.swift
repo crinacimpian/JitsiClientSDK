@@ -105,10 +105,12 @@ class ViewController: UIViewController {
     
     
     @IBAction func onDialPressed(_ sender: Any) {
+        print("CallManager|VC onDialPressed")
         callManager?.startCall(handle: "Jane", video: false)
     }
     
     @IBAction func onVideoCallPressed(_ sender: Any) {
+        print("CallManager|VC onVideoCallPressed")
         callManager?.startCall(handle: "Jane")
     }
     
@@ -127,6 +129,7 @@ class ViewController: UIViewController {
          */
         let backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         DispatchQueue.main.asyncAfter(wallDeadline: DispatchWallTime.now() + 2) {
+            print("CallManager:VC call displayIncomingCall")
             AppDelegate.shared.displayIncomingCall(uuid: UUID(), handle: "Jane", hasVideo: hasVideo) { _ in
                 UIApplication.shared.endBackgroundTask(backgroundTaskIdentifier)
             }
@@ -150,6 +153,7 @@ class ViewController: UIViewController {
 extension ViewController: JitsiMeetViewDelegate {
     
     func conferenceTerminated(_ data: [AnyHashable : Any]!) {
+        print("CallManager|VC - conferenceTerminated")
         if jitsiJoin {
             cleanUp()
         } else {

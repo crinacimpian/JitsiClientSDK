@@ -17,6 +17,7 @@ final class CallManager: NSObject, JMCallKitListener {
     var jitsiMeetView: JitsiMeetView?
     
     func startCall(handle: String, video: Bool = true) {
+        print("CallManager start call")
         let handle = CXHandle(type: .phoneNumber, value: handle)
         let startCallAction = CXStartCallAction(call: UUID(), handle: handle)
 
@@ -32,6 +33,7 @@ final class CallManager: NSObject, JMCallKitListener {
             }
         }
     }
+
     // MARK: Actions
     
     func performAnswerCall(UUID: UUID) {
@@ -47,23 +49,24 @@ final class CallManager: NSObject, JMCallKitListener {
     fileprivate func jitsiMeetJoin(UUID: UUID, video: Bool = true) {
         // create and configure jitsimeet view
         jitsiMeetView = JitsiMeetView()
+        jitsiMeetView?.delegate = vc
         let options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
             builder.welcomePageEnabled = false
             builder.setFeatureFlag("chat.enabled", withBoolean: false)
             builder.setFeatureFlag("invite.enabled", withBoolean: false)
             
             // TODO get the following info based on UUID
-            builder.room = "Jane"
+            builder.room = UUID.uuidString
+            builder.subject = "Subject"
             builder.audioOnly = false
             builder.audioMuted = false
             builder.videoMuted = !video
-            builder.welcomePageEnabled = false
-            
         }
         
         // setup view controller
         vc.modalPresentationStyle = .fullScreen
         vc.view = jitsiMeetView
+        vc.uuid = UUID
         
         // join room and display jitsi-call
         jitsiMeetView?.join(options)
@@ -72,10 +75,7 @@ final class CallManager: NSObject, JMCallKitListener {
     
     fileprivate func jitsiMeetEnd(UUID: UUID) {
         print("CallManager jitsiMeetEnd")
-        if(jitsiMeetView != nil) {
-            vc.dismiss(animated: true, completion: nil)
-            jitsiMeetView = nil
-        }
+        vc.cleanUp()
     }
     func providerDidReset() {
         print("CallManager provider did reset")

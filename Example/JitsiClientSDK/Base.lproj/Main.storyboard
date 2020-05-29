@@ -63,7 +63,6 @@
                                 </constraints>
                                 <state key="normal" title="Simulate incoming VIDEO call"/>
                                 <connections>
-                                    <action selector="simulateIncomingCallPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="sGT-ZU-4tr"/>
                                     <action selector="simulateIncomingVideoCallPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="EQE-Fp-Xf4"/>
                                 </connections>
                             </button>
@@ -85,7 +84,6 @@
                                 </constraints>
                                 <state key="normal" title="Call Video"/>
                                 <connections>
-                                    <action selector="onDialPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Dh7-Sc-stP"/>
                                     <action selector="onVideoCallPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kvv-Hp-KtE"/>
                                 </connections>
                             </button>
