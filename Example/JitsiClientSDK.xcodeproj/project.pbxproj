@@ -14,6 +14,9 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		B0549895B6D7A6BD43EEDF30 /* Pods_JitsiClientSDK_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E1835055C8797095F4A7A6 /* Pods_JitsiClientSDK_Example.framework */; };
+		EC1F8D332481B40E005B6937 /* CallListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1F8D322481B40E005B6937 /* CallListener.swift */; };
+		EC1F8D362481C4CC005B6937 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1F8D352481C4CC005B6937 /* Call.swift */; };
+		EC1F8D382481D08E005B6937 /* CallViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1F8D372481D08E005B6937 /* CallViewDelegate.swift */; };
 		EC371B2C2475F0E900CB0C8F /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC371B2B2475F0E900CB0C8F /* CallManager.swift */; };
 		EC371B38247705E300CB0C8F /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC371B37247705E300CB0C8F /* CallViewController.swift */; };
 /* End PBXBuildFile section */
@@ -45,6 +48,9 @@
 		C6AF402E401865DA9B719D99 /* Pods-JitsiClientSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JitsiClientSDK_Example.debug.xcconfig"; path = "Target Support Files/Pods-JitsiClientSDK_Example/Pods-JitsiClientSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		CA3024DA8AC239185D12062C /* Pods-JitsiClientSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JitsiClientSDK_Tests.release.xcconfig"; path = "Target Support Files/Pods-JitsiClientSDK_Tests/Pods-JitsiClientSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D8692C5248030F077A80A4F3 /* Pods_JitsiClientSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JitsiClientSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC1F8D322481B40E005B6937 /* CallListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallListener.swift; sourceTree = "<group>"; };
+		EC1F8D352481C4CC005B6937 /* Call.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Call.swift; sourceTree = "<group>"; };
+		EC1F8D372481D08E005B6937 /* CallViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewDelegate.swift; sourceTree = "<group>"; };
 		EC371B2B2475F0E900CB0C8F /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		EC371B3524765D9100CB0C8F /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		EC371B37247705E300CB0C8F /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
@@ -119,9 +125,9 @@
 		607FACD21AFB9204008FA782 /* Example for JitsiClientSDK */ = {
 			isa = PBXGroup;
 			children = (
+				EC1F8D342481BF72005B6937 /* Call Management */,
 				EC371B34247651AD00CB0C8F /* Controller */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				EC371B2B2475F0E900CB0C8F /* CallManager.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
@@ -165,11 +171,22 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		EC1F8D342481BF72005B6937 /* Call Management */ = {
+			isa = PBXGroup;
+			children = (
+				EC371B2B2475F0E900CB0C8F /* CallManager.swift */,
+				EC1F8D322481B40E005B6937 /* CallListener.swift */,
+				EC1F8D352481C4CC005B6937 /* Call.swift */,
+				EC1F8D372481D08E005B6937 /* CallViewDelegate.swift */,
+			);
+			name = "Call Management";
+			sourceTree = "<group>";
+		};
 		EC371B34247651AD00CB0C8F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				EC371B37247705E300CB0C8F /* CallViewController.swift */,
+				607FACD71AFB9204008FA782 /* ViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -376,9 +393,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC371B2C2475F0E900CB0C8F /* CallManager.swift in Sources */,
+				EC1F8D362481C4CC005B6937 /* Call.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				EC371B38247705E300CB0C8F /* CallViewController.swift in Sources */,
+				EC1F8D332481B40E005B6937 /* CallListener.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				EC1F8D382481D08E005B6937 /* CallViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

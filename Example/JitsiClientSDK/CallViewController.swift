@@ -10,57 +10,46 @@ import UIKit
 import CallKit
 import JitsiMeet
 
-class CallViewController: UIViewController, JitsiMeetViewDelegate {
-    var uuid:UUID?
+class CallViewController: UIViewController {
+    fileprivate var jitsiMeetView: JitsiMeetView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("CallManager:CVC viewDidDisappear")
     }
-    func cleanUp() {
-        print("CallManager:CVC cleanUp")
+    
+    func join(call: Call, video: Bool = true) {
+        print("CM: join")
+        // create and configure jitsimeet view
+        jitsiMeetView = JitsiMeetView() // TODO when join() called multiple times
+        jitsiMeetView?.delegate = CallViewDelegate.instance
+        let options = JitsiMeetConferenceOptions.fromBuilder { (builder) in
+            builder.welcomePageEnabled = false
+            builder.setFeatureFlag("chat.enabled", withBoolean: false)
+
+            builder.room = call.uuid.uuidString
+            builder.subject = call.handle
+            builder.videoMuted = !video
+        }
+
+        // setup view controller
+        self.modalPresentationStyle = .fullScreen
+        self.view = jitsiMeetView
+
+        jitsiMeetView?.join(options)
+        UIApplication.shared.keyWindow?.rootViewController?.present(self, animated: true, completion: nil)
+    }
+
+    func leave() {
+        print("CM: leave")
+        jitsiMeetView?.leave()
         if(view != nil) {
-            print("CallManager:CVC cleanUp \(String(describing: view))")
+            print("CM: leave view \(String(describing: view))")
             view = nil
         }
         dismiss(animated: true, completion: nil)
     }
-    
-    func conferenceTerminated(_ data: [AnyHashable : Any]!) {
-        print("CallManager:CVC conferenceTerminated \(String(describing: data["url"]))")
-        // TODO - better way to extract the UUID from URL
-        if let uuidPath  = URL(string: data["url"] as! String)?.path {
-            let i = uuidPath.index(uuidPath.startIndex, offsetBy: 1) // skip "/"
-            if let uuid = UUID(uuidString: String(uuidPath.suffix(from: i))) {
-                print("CallManager:CVC end call for \(uuid)")
-                endCall(uuid: uuid)
-            }
-        }
-        //cleanUp()
-    }
-    
-    func conferenceJoined(_ data: [AnyHashable : Any]!) {
-        print("CallManager:CVC conferenceJoined \(String(describing: data))")
-    }
-    
-    func conferenceWillJoin(_ data: [AnyHashable : Any]!) {
-        print("CallManager:CVC conferenceWillJoin \(String(describing: data))")
-    }
-    func endCall(uuid:UUID) { // TODO - pass Call
-        print("CallManager end call")
-        let endCallAction = CXEndCallAction(call: uuid)
-        let transaction = CXTransaction()
-        transaction.addAction(endCallAction)
-        JMCallKitProxy.request(transaction) { error in
-            if let error = error {
-                print("Error requesting transaction: \(error)")
-            } else {
-                print("Requested transaction successfully")
-            }
-        }
-    }
 }
-

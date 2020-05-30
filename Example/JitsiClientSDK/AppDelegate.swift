@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
     // MARK: UIApplicationDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        print("CallManager:AppDelegate - finished launching with options: \(String(describing: launchOptions))")
+        print("CM:AppDelegate - finished launching with options: \(String(describing: launchOptions))")
         JitsiMeet.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions ?? [:])
         pushRegistry.delegate = self
         pushRegistry.desiredPushTypes = [.voIP]
@@ -40,19 +40,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
         }
         let ringtoneSound: String? = nil //"Ringtone.caf"
         JMCallKitProxy.configureProvider(localizedName: localizedName, ringtoneSound: ringtoneSound, iconTemplateImageData: iconTemplateImageData)
-        JMCallKitProxy.addListener(callManager)
-        JMCallKitProxy.enabled = true // is it needed?!
+        JMCallKitProxy.addListener(CallListener(callManager: callManager))
+        // JMCallKitProxy.enabled = true // is it needed?!
         return true
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        print("CallManager:AppDelegate - _app url")
+        print("CM:AppDelegate - _app url")
         JitsiMeet.sharedInstance().application(app, open: url, options: options)
         return true
     }
 
     private func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        print("CallManager:AppDelegate - _app userActivity")
+        print("CM:AppDelegate - _app userActivity")
         JitsiMeet.sharedInstance().application(application, continue: userActivity, restorationHandler: restorationHandler)
         return true
     }
@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
     // MARK: PKPushRegistryDelegate
 
     func pushRegistry(_ registry: PKPushRegistry, didUpdate credentials: PKPushCredentials, for type: PKPushType) {
-        print("CallManager:AppDelegate - push registry called 1")
+        print("CM:AppDelegate - push registry called 1")
         /*
          Store push credentials on server for the active user.
          For sample app purposes, do nothing since everything is being done locally.
@@ -68,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
     }
 
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
-        print("CallManager:AppDelegate - push registry called 2")
+        print("CM:AppDelegate - push registry called 2")
         guard type == .voIP else { return }
 
         if let uuidString = payload.dictionaryPayload["UUID"] as? String,
@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
 
     /// Display the incoming call to the user
     func displayIncomingCall(uuid: UUID, handle: String, hasVideo: Bool = false, completion: ((NSError?) -> Void)? = nil) {
-        print("CallManager:AppDelegate - displayIncomingCall \(uuid) \(handle) \(hasVideo)")
+        print("CM:AppDelegate - displayIncomingCall \(uuid) \(handle) \(hasVideo)")
 
         // Display the incoming call
         JMCallKitProxy.reportNewIncomingCall(UUID: uuid, handle: handle, displayName: handle, hasVideo: true) { error in
@@ -91,9 +91,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
                 since calls may be "denied" for various legitimate reasons. See CXErrorCodeIncomingCallError.
              */
             if error == nil {
-                print("no error")
+                print("CM:AppDelegate reportNewIncomingCall")
+                let call = Call(uuid: uuid, handle: handle)
+
+                self.callManager.addCall(call)
             } else {
-                print("error \(error.debugDescription)")
+                print("CM:AppDelegate error \(error.debugDescription)")
             }
 
             completion?(error as NSError?)
